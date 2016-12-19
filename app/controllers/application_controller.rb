@@ -17,9 +17,10 @@ class ApplicationController < Sinatra::Base
 
 
   post '/posts' do
-    @post = Post.create(name: params["name"], content: params["content"])
+    @post = Post.create(name: params["post"]["name"], content: params["post"]["content"])
     redirect to '/posts'
   end
+
 
 
   get '/posts' do
@@ -50,7 +51,6 @@ class ApplicationController < Sinatra::Base
 
   delete '/posts/:id/delete' do
     @deleted_post = Post.find_by_id(params[:id])
-
     Post.delete(params[:id])
     erb :deleted
   end
